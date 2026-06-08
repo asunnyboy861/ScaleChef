@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F207" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SavedIngredient" representedClassName="SavedIngredient" syncable="YES">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="originalLine" attributeType="String"/>
+        <attribute name="quantity" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="unit" attributeType="String"/>
+        <relationship name="recipe" maxCount="1" deletionRule="Nullify" destinationEntity="SavedRecipe" inverseName="ingredients" inverseEntity="SavedRecipe"/>
+    </entity>
+    <entity name="SavedRecipe" representedClassName="SavedRecipe" syncable="YES">
+        <attribute name="category" attributeType="String"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desiredServings" attributeType="Integer 16" defaultValueString="4" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="instructions" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="originalServings" attributeType="Integer 16" defaultValueString="4" usesScalarValueType="YES"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SavedIngredient" inverseName="recipe" inverseEntity="SavedIngredient"/>
+    </entity>
+</model>
