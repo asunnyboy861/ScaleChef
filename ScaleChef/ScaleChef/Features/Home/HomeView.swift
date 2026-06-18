@@ -3,33 +3,35 @@ import SwiftUI
 struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @Environment(PurchaseService.self) private var purchaseService
+    @State private var showPaywall = false
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: SCSpace.lg) {
-                    pasteSection
-                    urlImportButton
-                    recentRecipesSection
-                    quickScaleSection
-                }
-                .padding(.horizontal, SCSpace.md)
-                .padding(.top, SCSpace.md)
+        ScrollView {
+            VStack(spacing: SCSpace.lg) {
+                pasteSection
+                urlImportButton
+                recentRecipesSection
+                quickScaleSection
             }
-            .background(Color.scBackground)
-            .navigationTitle("ScaleChef")
-            .onAppear { viewModel.loadRecentRecipes() }
-            .sheet(isPresented: $viewModel.showScaleView) {
-                if let recipe = viewModel.parsedRecipe {
-                    ScaleView(recipe: recipe)
-                }
+            .padding(.horizontal, SCSpace.md)
+            .padding(.top, SCSpace.md)
+        }
+        .background(Color.scBackground)
+        .navigationTitle("ScaleChef")
+        .onAppear { viewModel.loadRecentRecipes() }
+        .sheet(isPresented: $viewModel.showScaleView) {
+            if let recipe = viewModel.parsedRecipe {
+                ScaleView(recipe: recipe)
             }
-            .sheet(isPresented: $viewModel.showURLImport) {
-                URLImportView { recipe in
-                    viewModel.parsedRecipe = recipe
-                    viewModel.showScaleView = true
-                }
+        }
+        .sheet(isPresented: $viewModel.showURLImport) {
+            URLImportView { recipe in
+                viewModel.parsedRecipe = recipe
+                viewModel.showScaleView = true
             }
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
         }
     }
 
@@ -77,7 +79,13 @@ struct HomeView: View {
     }
 
     private var urlImportButton: some View {
-        Button(action: { viewModel.showURLImport = true }) {
+        Button(action: {
+            if purchaseService.isPremium {
+                viewModel.showURLImport = true
+            } else {
+                showPaywall = true
+            }
+        }) {
             HStack {
                 Image(systemName: "link")
                     .foregroundStyle(Color.scPrimary)
@@ -85,6 +93,16 @@ struct HomeView: View {
                     .font(SCFont.headline)
                     .foregroundStyle(Color.scPrimary)
                 Spacer()
+                if !purchaseService.isPremium {
+                    Text("PRO")
+                        .font(SCFont.caption)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.scPrimary)
+                        .cornerRadius(4)
+                }
                 Image(systemName: "chevron.right")
                     .foregroundStyle(Color.scTextSecondary)
             }
@@ -121,9 +139,9 @@ struct HomeView: View {
                 .foregroundStyle(Color.scTextPrimary)
 
             HStack(spacing: SCSpace.sm) {
-                ForEach(["0.5x", "1.5x", "2x", "3x"], id: \.self) { label in
-                    Button(action: {}) {
-                        Text(label)
+                ForEach([0.5, 1.5, 2.0, 3.0], id: \.self) { factor in
+                    Button(action: { quickScaleWithFactor(factor) }) {
+                        Text(factor == floor(factor) ? "\(Int(factor))x" : String(format: "%.1fx", factor))
                             .font(SCFont.headline)
                             .foregroundStyle(Color.scPrimary)
                             .frame(maxWidth: .infinity)
@@ -134,6 +152,18 @@ struct HomeView: View {
                 }
             }
         }
+    }
+
+    private func quickScaleWithFactor(_ factor: Double) {
+        let sampleRecipe = ParsedRecipe(
+            name: "Quick Scale",
+            originalServings: 1,
+            ingredients: [],
+            category: .cooking,
+            instructions: []
+        )
+        viewModel.parsedRecipe = sampleRecipe
+        viewModel.showScaleView = true
     }
 }
 

@@ -15,3 +15,10 @@ build/
 
 # Environment
 .env
+
+# ASO & Strategy (confidential)
+keytext*.md
+COMPETITOR_REPORT.md
+
+# Temp files
+*.png

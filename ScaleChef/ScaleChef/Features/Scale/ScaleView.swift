@@ -20,6 +20,7 @@ struct ScaleView: View {
                     smartAdjustmentsBanner
                     ingredientsList
                     instructionsSection
+                    bakersPercentLink
                 }
                 .padding(.horizontal, SCSpace.md)
                 .padding(.top, SCSpace.md)
@@ -33,7 +34,13 @@ struct ScaleView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Button(action: { viewModel.saveRecipe() }) {
+                        Button(action: {
+                            if viewModel.canSave(isPremium: purchaseService.isPremium) {
+                                viewModel.saveRecipe()
+                            } else {
+                                viewModel.showPaywall = true
+                            }
+                        }) {
                             Label("Save Recipe", systemImage: "square.and.arrow.down")
                         }
                         Button(action: shareRecipe) {
@@ -46,6 +53,9 @@ struct ScaleView: View {
             }
             .sheet(isPresented: $viewModel.showPaywall) {
                 PaywallView()
+            }
+            .alert("Recipe Saved", isPresented: $viewModel.showSaveSuccess) {
+                Button("OK", role: .cancel) {}
             }
         }
     }
@@ -94,7 +104,7 @@ struct ScaleView: View {
             HStack(spacing: SCSpace.sm) {
                 ForEach([0.5, 1.5, 2.0, 2.5, 3.0, 4.0], id: \.self) { factor in
                     Button(action: { viewModel.quickScale(factor) }) {
-                        Text(factor == floor(factor) ? "\(Int(factor))x" : "\(factor)x")
+                        Text(factor == floor(factor) ? "\(Int(factor))x" : String(format: "%.1fx", factor))
                             .font(SCFont.headline)
                             .foregroundStyle(viewModel.scaleFactor == factor ? .white : Color.scPrimary)
                             .padding(.horizontal, SCSpace.md)
@@ -170,6 +180,24 @@ struct ScaleView: View {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let viewController = windowScene.windows.first?.rootViewController else { return }
         ShareService.shareText(scaled, from: viewController)
+    }
+
+    private var bakersPercentLink: some View {
+        NavigationLink(destination: BakersPercentView(recipe: recipe)) {
+            HStack {
+                Image(systemName: "percent")
+                    .foregroundStyle(Color.scPrimary)
+                Text("Baker's Percentage")
+                    .font(SCFont.headline)
+                    .foregroundStyle(Color.scTextPrimary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.scTextSecondary)
+            }
+            .padding(SCSpace.md)
+            .background(Color.scSurface)
+            .cornerRadius(12)
+        }
     }
 }
 

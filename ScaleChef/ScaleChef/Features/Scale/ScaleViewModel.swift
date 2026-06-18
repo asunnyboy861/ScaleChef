@@ -7,6 +7,7 @@ final class ScaleViewModel {
     var useFactorMode = false
     var scaledRecipe: ScaledRecipe?
     var showPaywall = false
+    var showSaveSuccess = false
 
     private let engine = ScalingEngine()
     let originalRecipe: ParsedRecipe
@@ -52,7 +53,12 @@ final class ScaleViewModel {
 
     func saveRecipe() {
         guard let scaled = scaledRecipe else { return }
-        try? StorageService.shared.saveRecipe(originalRecipe, desiredServings: scaled.desiredServings)
+        do {
+            try StorageService.shared.saveRecipe(originalRecipe, desiredServings: scaled.desiredServings)
+            showSaveSuccess = true
+        } catch {
+            // Save failed silently
+        }
     }
 
     var adjustmentCount: Int {

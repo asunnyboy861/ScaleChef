@@ -1,8 +1,15 @@
-import Foundation
+import SwiftUI
 
 struct FractionFormatter {
 
+    @AppStorage("showFractions") static var showFractions = true
+
     static func format(_ value: Double) -> String {
+        if !showFractions {
+            if value == floor(value) { return "\(Int(value))" }
+            return String(format: "%.1f", value)
+        }
+
         let whole = Int(value)
         let fraction = value - Double(whole)
 
@@ -47,8 +54,8 @@ struct FractionFormatter {
         }
 
         if bestDiff > 0.05 {
-            let decimal = String(format: "%.1f", value)
-            return FractionCandidate(value: value, symbol: decimal)
+            let decimal = String(format: "%.2f", value + Double(Int(0)))
+            return FractionCandidate(value: value, symbol: decimal.hasSuffix("0") ? String(decimal.dropLast()) : decimal)
         }
 
         return best

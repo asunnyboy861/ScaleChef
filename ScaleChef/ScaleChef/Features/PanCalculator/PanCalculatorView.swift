@@ -153,6 +153,11 @@ struct PanCalculatorView: View {
                                 .foregroundStyle(Color.scTextSecondary)
                         }
                     }
+
+                    Text("Use this factor when scaling your recipe to adjust for the new pan size.")
+                        .font(SCFont.caption)
+                        .foregroundStyle(Color.scTextSecondary)
+                        .multilineTextAlignment(.center)
                 }
                 .padding(SCSpace.lg)
                 .background(Color.scSurface)

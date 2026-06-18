@@ -44,7 +44,7 @@ final class StorageService {
     }
 
     func fetchRecipes() -> [SavedRecipe] {
-        let request = SavedRecipe.fetchRequest() as! NSFetchRequest<SavedRecipe>
+        let request = SavedRecipe.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         return (try? context.fetch(request)) ?? []
     }
@@ -55,7 +55,7 @@ final class StorageService {
     }
 
     func recipeCount() -> Int {
-        let request = SavedRecipe.fetchRequest() as! NSFetchRequest<SavedRecipe>
+        let request = SavedRecipe.fetchRequest()
         return (try? context.count(for: request)) ?? 0
     }
 
