@@ -43,8 +43,8 @@ struct SettingsView: View {
                 NavigationLink(destination: ContactSupportView()) {
                     Text("Contact Support")
                 }
-                Link("Privacy Policy", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/privacy")!)
-                Link("Terms of Use", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/terms")!)
+                Link("Privacy Policy", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/privacy.html")!)
+                Link("Terms of Use", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/terms.html")!)
             }
         }
         .navigationTitle("Settings")

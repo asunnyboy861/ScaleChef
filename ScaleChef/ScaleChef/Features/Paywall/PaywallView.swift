@@ -94,9 +94,9 @@ struct PaywallView: View {
 
     private var legalLinks: some View {
         HStack(spacing: SCSpace.md) {
-            Link("Privacy Policy", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/privacy")!)
+            Link("Privacy Policy", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/privacy.html")!)
             Text("|")
-            Link("Terms of Use", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/terms")!)
+            Link("Terms of Use", destination: URL(string: "https://asunnyboy861.github.io/ScaleChef/terms.html")!)
         }
         .font(SCFont.caption)
         .foregroundStyle(Color.scTextSecondary)

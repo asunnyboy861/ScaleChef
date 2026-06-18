@@ -3,51 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScaleChef - Support</title>
+    <title>ScaleChef - Smart Recipe Scaler</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 680px; margin: 0 auto; padding: 24px; color: #1a1a2e; line-height: 1.6; }
-        h1 { color: #E87326; } h2 { color: #2E6B4F; margin-top: 32px; }
-        a { color: #E87326; }
-        .faq-item { margin-bottom: 16px; }
-        .faq-q { font-weight: 600; color: #1a1a2e; }
-        .faq-a { color: #6B7280; margin-top: 4px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; line-height: 1.6; background: #fafafa; }
+        .hero { background: linear-gradient(135deg, #E87326 0%, #F59E4B 100%); color: white; text-align: center; padding: 64px 24px 48px; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
+        .hero .tagline { font-size: 20px; opacity: 0.95; margin-bottom: 32px; }
+        .hero .download-btn { display: inline-block; background: #000; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 12px; font-size: 18px; font-weight: 600; transition: transform 0.2s, background 0.2s; }
+        .hero .download-btn:hover { transform: scale(1.05); background: #222; }
+        .hero .download-btn svg { vertical-align: middle; margin-right: 8px; }
+        .hero .price-note { margin-top: 12px; font-size: 14px; opacity: 0.85; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .features { padding: 48px 0; }
+        .features h2 { text-align: center; font-size: 28px; color: #E87326; margin-bottom: 32px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+        .feature-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .feature-card .icon { font-size: 32px; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 17px; color: #1a1a2e; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #6B7280; }
+        .how-it-works { padding: 48px 0; background: #fff; }
+        .how-it-works h2 { text-align: center; font-size: 28px; color: #2E6B4F; margin-bottom: 32px; }
+        .steps { display: flex; flex-direction: column; gap: 20px; max-width: 560px; margin: 0 auto; }
+        .step { display: flex; align-items: flex-start; gap: 16px; }
+        .step-num { background: #2E6B4F; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .step-text h3 { font-size: 16px; color: #1a1a2e; margin-bottom: 4px; }
+        .step-text p { font-size: 14px; color: #6B7280; }
+        .pricing { padding: 48px 0; text-align: center; }
+        .pricing h2 { font-size: 28px; color: #E87326; margin-bottom: 16px; }
+        .pricing .plan { background: #fff; border-radius: 16px; padding: 32px; max-width: 400px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .pricing .plan h3 { font-size: 20px; color: #1a1a2e; margin-bottom: 8px; }
+        .pricing .plan .price { font-size: 36px; font-weight: 800; color: #E87326; margin-bottom: 16px; }
+        .pricing .plan .price small { font-size: 16px; font-weight: 400; color: #6B7280; }
+        .pricing .plan ul { list-style: none; text-align: left; margin-bottom: 24px; }
+        .pricing .plan ul li { padding: 6px 0; font-size: 14px; color: #374151; }
+        .pricing .plan ul li::before { content: "\2713 "; color: #2E6B4F; font-weight: 700; }
+        .cta { text-align: center; padding: 48px 0 64px; }
+        .cta p { font-size: 18px; color: #6B7280; margin-bottom: 24px; }
+        footer { text-align: center; padding: 24px; font-size: 13px; color: #9CA3AF; border-top: 1px solid #e5e7eb; }
+        footer a { color: #E87326; text-decoration: none; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 32px; }
+            .hero .tagline { font-size: 16px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <h1>ScaleChef Support</h1>
+    <section class="hero">
+        <h1>ScaleChef</h1>
+        <p class="tagline">Smart Recipe Scaler for Bakers &amp; Cooks</p>
+        <a href="https://apps.apple.com/us/app/scalechef/id6749349153" class="download-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download on the App Store
+        </a>
+        <p class="price-note">Free with Premium unlock at $3.99 — one-time purchase, no subscription</p>
+    </section>
 
-    <h2>Contact Us</h2>
-    <p>Have questions or feedback? We'd love to hear from you!</p>
-    <p>Email: <a href="mailto:iocompile67692@gmail.com">iocompile67692@gmail.com</a></p>
+    <section class="features">
+        <div class="container">
+            <h2>Why ScaleChef?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">&#x1F9E0;</div>
+                    <h3>Smart Scaling Engine</h3>
+                    <p>Leavening, yeast, and spices auto-adjust using professional baking formulas. No more flat cakes or over-spiced dishes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F373;</div>
+                    <h3>Pan Size Calculator</h3>
+                    <p>Convert any recipe between round, square, rectangle, and loaf pans with area-based precision.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F35E;</div>
+                    <h3>Baker's Percentage</h3>
+                    <p>View recipes in professional baker's percentages with hydration analysis. Perfect for sourdough and bread baking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F517;</div>
+                    <h3>URL Recipe Import</h3>
+                    <p>Found a recipe online? Paste the URL and import it instantly. Works with most major recipe sites.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#xBD;</div>
+                    <h3>Fraction Display</h3>
+                    <p>All quantities shown as kitchen-friendly fractions — 1/2, 1/4, 3/4 — just like a real cookbook.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">&#x1F4F1;</div>
+                    <h3>Offline First</h3>
+                    <p>No account needed. All computation and storage happens locally on your device. Your recipes stay private.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h2>Frequently Asked Questions</h2>
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <h3>Paste Your Recipe</h3>
+                        <p>Copy any recipe text and paste it in. ScaleChef auto-parses ingredients, servings, and steps.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <h3>Choose Your Scale</h3>
+                        <p>Tap quick scale buttons (0.5x, 1.5x, 2x, 3x) or enter a custom serving count.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <h3>Get Smart Results</h3>
+                        <p>Baking powder adjusts sub-linearly, eggs round to halves, and spices are gently reduced. Every time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="faq-item">
-        <p class="faq-q">How does smart scaling work?</p>
-        <p class="faq-a">Smart scaling adjusts ingredients differently based on their type. Leavening agents (baking powder, baking soda) scale sub-linearly because they become more effective in larger batches. Yeast also scales down because it's more active in larger volumes. Spices are reduced to prevent over-seasoning. Eggs are rounded to the nearest half.</p>
-    </div>
+    <section class="pricing">
+        <div class="container">
+            <h2>Simple Pricing</h2>
+            <div class="plan">
+                <h3>ScaleChef Premium</h3>
+                <div class="price">$3.99 <small>one-time</small></div>
+                <ul>
+                    <li>Smart baking-aware adjustments</li>
+                    <li>Pan size calculator</li>
+                    <li>Baker's percentage mode</li>
+                    <li>URL recipe import</li>
+                    <li>Unlimited recipe saves</li>
+                    <li>No subscription ever</li>
+                </ul>
+                <a href="https://apps.apple.com/us/app/scalechef/id6749349153" class="download-btn" style="font-size:16px; padding:12px 28px;">
+                    Get ScaleChef Free
+                </a>
+                <p style="margin-top:12px; font-size:13px; color:#9CA3AF;">Free tier includes basic scaling, paste &amp; parse, and fraction display</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="faq-item">
-        <p class="faq-q">Why is my baking powder amount less than expected?</p>
-        <p class="faq-a">This is intentional! Leavening agents don't scale linearly. When you double a recipe, you don't need double the baking powder. Our engine uses the formula factor^0.8 for leavening, which is the professional baking standard.</p>
-    </div>
+    <section class="cta">
+        <div class="container">
+            <p>Stop guessing when you scale recipes. Start baking with confidence.</p>
+            <a href="https://apps.apple.com/us/app/scalechef/id6749349153" class="download-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download on the App Store
+            </a>
+        </div>
+    </section>
 
-    <div class="faq-item">
-        <p class="faq-q">How do I use the pan calculator?</p>
-        <p class="faq-a">Enter your original pan dimensions and the new pan dimensions. The calculator compares the surface areas and gives you a scale factor to apply to your recipe.</p>
-    </div>
-
-    <div class="faq-item">
-        <p class="faq-q">What's included in Premium?</p>
-        <p class="faq-a">Premium unlocks smart baking adjustments, pan calculator, baker's percentage mode, URL recipe import, and unlimited recipe saves. It's a one-time purchase of $3.99 — no subscription!</p>
-    </div>
-
-    <div class="faq-item">
-        <p class="faq-q">How do I import a recipe from a URL?</p>
-        <p class="faq-a">Tap "Import from URL" on the home screen, paste the recipe URL, and tap Import. The app works best with sites that use structured recipe data (Schema.org).</p>
-    </div>
-
-    <h2>Legal</h2>
-    <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a></p>
+    <footer>
+        <a href="support.html">Support</a> &middot;
+        <a href="privacy.html">Privacy Policy</a> &middot;
+        <a href="terms.html">Terms of Use</a>
+        <br>&copy; 2026 ScaleChef. All rights reserved.
+    </footer>
 </body>
 </html>

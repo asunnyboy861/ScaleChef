@@ -15,7 +15,8 @@
 
 | Page | URL | Status |
 |------|-----|--------|
-| Support / Landing | https://asunnyboy861.github.io/ScaleChef/ | Live |
+| Landing Page | https://asunnyboy861.github.io/ScaleChef/ | Live |
+| Support / FAQ | https://asunnyboy861.github.io/ScaleChef/support.html | Live |
 | Privacy Policy | https://asunnyboy861.github.io/ScaleChef/privacy.html | Live |
 | Terms of Use | https://asunnyboy861.github.io/ScaleChef/terms.html | Live |
 
@@ -49,7 +50,8 @@ ScaleChef/
 │       │   └── Settings/              # SettingsView
 │       └── Shared/                    # Extensions, Constants
 ├── docs/                              # Policy Pages (GitHub Pages source)
-│   ├── index.html                     # Support / FAQ page
+│   ├── index.html                     # Landing page (app intro + App Store link)
+│   ├── support.html                   # Support / FAQ page
 │   ├── privacy.html                   # Privacy Policy
 │   └── terms.html                     # Terms of Use
 ├── .github/workflows/
